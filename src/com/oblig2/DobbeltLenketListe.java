@@ -1,4 +1,4 @@
-//Skrevet av Salem Hamidi - S333946
+//Skrevet av Salem Hamidi - S333946 5
 package com.oblig2;
 
 
