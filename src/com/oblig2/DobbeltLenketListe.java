@@ -99,10 +99,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-
+    //ikke fullført
     public Liste<T> subliste(int fra, int til) {
+        fratilKontroll(fra, til, antall);
 
-        throw new NotImplementedException();
     }
 
 
