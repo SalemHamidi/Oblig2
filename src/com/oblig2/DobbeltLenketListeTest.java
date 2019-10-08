@@ -135,8 +135,8 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 1q: leggInn-metoden brukes i konstruktøren!");
         }
-    }
 
+    }
 
     ////// Oppgave 2 /////////////////////
     @org.junit.jupiter.api.Test

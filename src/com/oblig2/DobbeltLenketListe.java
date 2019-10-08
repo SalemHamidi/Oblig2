@@ -1,4 +1,4 @@
-//Skrevet av Salem Hamidi - S333946 5
+//Skrevet av Salem Hamidi - S333946
 package com.oblig2;
 
 
@@ -16,14 +16,13 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-
-
 public class DobbeltLenketListe<T> implements Liste<T> {
 
     /**
      * Node class
      * @param <T>
      */
+
     private static final class Node<T> {
         private T verdi;                   // nodens verdi
         private Node<T> forrige, neste;    // pekere
@@ -46,25 +45,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new NotImplementedException();
+     //   throw new NotImplementedException();
     }
 
     public DobbeltLenketListe(T[] a) {
+        
+    }
+
+    public Liste<T> subliste(int fra, int til) {
         throw new NotImplementedException();
     }
 
-    public Liste<T> subliste(int fra, int til){
-        throw new NotImplementedException();
-    }
 
     @Override
     public int antall() {
-        throw new NotImplementedException();
+      return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new NotImplementedException();
+        if(antall != 0) {
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @Override
@@ -164,7 +169,4 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new NotImplementedException();
     }
-
 } // class DobbeltLenketListe
-
-
