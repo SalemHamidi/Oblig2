@@ -105,11 +105,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        if(verdi == null) {
-            String str = null;
-            str =  Objects.requireNonNull(str);
+        Objects.requireNonNull(verdi, "Ikke tilltatt med null-verdier");
+        if(antall == 0){
+            hode = new Node<>(verdi);
+            hode = hale;
         }
-
+        else {
+            hale = hale.neste = new Node<>(verdi);
+        }
+        antall++;
         return true;
     }
 
