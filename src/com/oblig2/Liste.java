@@ -37,4 +37,20 @@ public interface Liste<T> extends Beholder<T> {
             throw new IndexOutOfBoundsException(melding(indeks));
         }
     }
+    public static void fratilKontroll(int antall, int fra, int til) {
+        if (fra < 0) {
+            throw new IndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
+        }
+
+        if (til > antall) {
+            throw new IndexOutOfBoundsException
+                    ("til(" + til + ") > antall (" + antall + ")");
+        }
+
+        if (fra > til) {
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
+    }
 }  // Liste

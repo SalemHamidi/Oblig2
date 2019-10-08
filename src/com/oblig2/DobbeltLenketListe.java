@@ -101,6 +101,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public Liste<T> subliste(int fra, int til) {
+
         throw new NotImplementedException();
     }
 
@@ -165,6 +166,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> p = finnNode(indeks);
         T gammelVerdi = p.verdi;
         p.verdi = nyverdi;
+        endringer++;
         return gammelVerdi;
     }
 
