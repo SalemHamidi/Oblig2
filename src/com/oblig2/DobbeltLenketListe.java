@@ -102,9 +102,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return true;
         }
     }
-
+//Skriver ut noe men ikke alt, delvis fullført
     @Override
     public boolean leggInn(T verdi) {
+
         Objects.requireNonNull(verdi, "Ikke tilltatt med null-verdier");
         if(antall == 0){
             hode = new Node<>(verdi);
@@ -114,6 +115,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hale = hale.neste = new Node<>(verdi);
         }
         antall++;
+        endringer++;
         return true;
     }
 
