@@ -340,7 +340,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            throw new NotImplementedException();
+            Node<T> p = new Node(indeks);
+            p = denne;
+            denne = hode;
+            fjernOK = false;
+            iteratorendringer = endringer;
         }
 
         @Override
