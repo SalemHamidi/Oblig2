@@ -99,10 +99,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-    //ikke fullført
+
     public Liste<T> subliste(int fra, int til) {
         fratilKontroll(fra, til, antall);
-
+        throw new NotImplementedException();
     }
 
 
@@ -113,12 +113,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-        if(antall != 0) {
-            return false;
-        }
-        else{
-            return true;
-        }
+        return antall == 0;
     }
 //Skriver ut noe men ikke alt, delvis fullført
     @Override
@@ -155,7 +150,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new NotImplementedException();
+        if (verdi == null) {
+            return -1;
+        }
+
+        Node<T> p = hode;
+
+        for (int indeks = 0; indeks < antall; indeks++) {
+            if (p.verdi.equals(verdi)) {
+                return indeks;
+            }
+            p = p.neste;
+        }
+        return -1;
     }
 
     @Override
