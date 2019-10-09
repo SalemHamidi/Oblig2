@@ -260,7 +260,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new NotImplementedException();
+
+        //Metode 1
+        Node<T> p = hode;
+        Node<T> q = null;
+
+        while (p != null) {
+            q = p.neste;
+            p.neste = null;
+            p.verdi = null;
+            p = q;
+        }
+        //Metode 2
+        for(int i = 0; i < antall; i++) {
+            fjern(0);
+        }
+
+        hode = hale = null;
+        antall = 0;
     }
 
     @Override
