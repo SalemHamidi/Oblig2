@@ -320,7 +320,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-       
+        throw new NotImplementedException();
     }
 
     public Iterator<T> iterator(int indeks) {
