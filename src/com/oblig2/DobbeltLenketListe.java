@@ -299,7 +299,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         s.append(']');
         return s.toString();
     }
-    /*
+    /* Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException("Ikke laget ennå!");
     }
