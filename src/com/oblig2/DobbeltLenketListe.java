@@ -299,7 +299,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         s.append(']');
         return s.toString();
     }
-
+    /*
+    public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
+        throw new UnsupportedOperationException("Ikke laget ennå!");
+    }
+    */
     public String omvendtString() {
         StringBuilder s  = new StringBuilder();
         s.append("[");
@@ -317,6 +321,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         s.append(']');
         return s.toString();
     }
+
+
+
 
     @Override
     public Iterator<T> iterator() {
