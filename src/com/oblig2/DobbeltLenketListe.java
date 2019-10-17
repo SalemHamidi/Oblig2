@@ -1,9 +1,7 @@
 //Skrevet av Salem Hamidi - S333946
 package com.oblig2;
 
-
 ////////////////// class DobbeltLenketListe //////////////////////////////
-
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -48,15 +46,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public DobbeltLenketListe() {
-        //   throw new NotImplementedException();
+       hode = hale = null;
+        antall = 0;
     }
 
     private Node<T> finnNode(int indeks) {
 
         if (indeks < (antall / 2)) {
             Node<T> p = hale;
-            for (int i = 0; i < indeks; i++) {
-                p = p.forrige;
+            for ( int i = 0; i < indeks; i++) {
+                p = p.neste;
             }
             return p;
         }
@@ -71,24 +70,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public DobbeltLenketListe(T[] a) {
-        Objects.requireNonNull(a);
+        Objects.requireNonNull(a, "ikke tilltatt med null");
 
         if(a == null) {
             throw new NullPointerException("Tabellen a er null!");
         }
+
         if(a.length == 1) {
             hode = hale;
             antall = 1;
         }
-        if(antall == 1){
-            tom();
-        }
 
         DobbeltLenketListe liste = new DobbeltLenketListe();
-
         liste.hode = new DobbeltLenketListe.Node(a);
         liste.hale = liste.hode;
-
+        if(liste.antall() < 0) {
+            tom();
+        }
         DobbeltLenketListe.Node p = liste.hale;
         p.verdi = a[0];
         for (int i = 1; i < a.length; i++) {
@@ -97,15 +95,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             p.neste = q;
             p = q;
             liste.hale = q;
+            antall++;
         }
 
-
-        }
+    }
 
 
     public Liste<T> subliste(int fra, int til) {
+
         fratilKontroll(fra, til, antall);
-        throw new NotImplementedException();
+
+
     }
 
 //Oppgave1
@@ -129,13 +129,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         else {
             hale = hale.neste = new Node<>(verdi);
-            antall++;
         }
         antall++;
         endringer++;
         return true;
     }
-
     @Override
     public void leggInn(int indeks, T verdi) {
         Objects.requireNonNull(verdi, "Ikke tilltatt med null verdier");
@@ -315,19 +313,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder s  = new StringBuilder();
         s.append("[");
 
-        if(!tom()) {
+        if (!tom()) {
             Node<T> q = hale;
-            while(q != null) {
-                s.append(q.verdi);
-            }
+            s.append(q.verdi);
+            q = q.forrige;
 
             while(q != null){
-                q = q.forrige;
-                s.append(q.verdi).append(' ').append(',');
+                s.append(',').append(' ').append(q.verdi);
                 q = q.forrige;
             }
         }
-
         s.append(']');
         return s.toString();
     }
