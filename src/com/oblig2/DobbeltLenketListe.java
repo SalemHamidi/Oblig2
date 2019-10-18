@@ -6,13 +6,8 @@ package com.oblig2;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.SQLOutput;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
+import java.util.*;
 
-import java.util.Iterator;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -70,10 +65,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public DobbeltLenketListe(T[] a) {
+
+        DobbeltLenketListe liste = new DobbeltLenketListe();
+
         Objects.requireNonNull(a, "ikke tilltatt med null");
 
         if(a == null) {
             throw new NullPointerException("Tabellen a er null!");
+        }
+        if(a.length == 0) {
+            return;
         }
 
         if(a.length == 1) {
@@ -81,7 +82,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             antall = 1;
         }
 
-        DobbeltLenketListe liste = new DobbeltLenketListe();
         liste.hode = new DobbeltLenketListe.Node(a);
         liste.hale = liste.hode;
         if(liste.antall() < 0) {
@@ -91,6 +91,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         p.verdi = a[0];
         for (int i = 1; i < a.length; i++) {
             DobbeltLenketListe.Node q = new DobbeltLenketListe.Node(a[i]);
+
             q.forrige = p;
             p.neste = q;
             p = q;
@@ -102,10 +103,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public Liste<T> subliste(int fra, int til) {
-
         fratilKontroll(fra, til, antall);
-
-
+        throw new NotImplementedException();
     }
 
 //Oppgave1
@@ -134,24 +133,38 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
         return true;
     }
+    /*
+        // instansvariabler
+    private Node<T> hode;          // peker til den første i listen
+    private Node<T> hale;          // peker til den siste i listen
+    private int antall;            // antall noder i listen
+    private int endringer;         // antall endringer i listen
+
+     */
     @Override
     public void leggInn(int indeks, T verdi) {
         Objects.requireNonNull(verdi, "Ikke tilltatt med null verdier");
         indeksKontroll(indeks, true);
 
+
         if(indeks == 0) {
-            hode = new Node<>(verdi);
+            hale = hode = new Node<>(verdi);
         }
         if(antall == 0){
             hale = hode;
         }
 
-        else if(indeks < antall) {
-            hale = hale.forrige = new Node<>(verdi);
-        }
-        else {
+        if(indeks > antall) {
+            Node<T> q = hale;
+            for(int i = indeks; i < 100_001; i--) {
+                q = hale.forrige;
+            }
+            q.forrige = new Node<>(verdi);
+    }
+
+        if(indeks < antall) {
             Node<T> p = hode;
-            for(int i = 1; i < indeks; i++) {
+            for(int i = indeks; i < indeks; i++) {
                 p = p.neste;
             }
             p.neste = new Node<>(verdi);
@@ -213,7 +226,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
             p = q;
             q = q.neste;
-
         }
         if (q == null) {
             return false;
@@ -227,6 +239,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         if (q == hale) {
             hale = p;
+
         }
         q.verdi = null;
         q.neste = null;
@@ -363,15 +376,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next(){
-
-            if(!hasNext()) {
-                throw new NoSuchElementException("Ingen verdier");
-        }
             if(iteratorendringer != endringer) {
                 throw new ConcurrentModificationException();
             }
 
-
+            if(hasNext()) {
+                throw new NoSuchElementException("Ingen verdier");
+            }
             fjernOK = true;
             T denneVerdi = denne.verdi;
             denne = denne.neste;
