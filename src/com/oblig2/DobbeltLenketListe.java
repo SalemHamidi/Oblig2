@@ -81,17 +81,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = hale;
             antall = 1;
         }
+        if(a.length >=2 ) {
+            antall++;
+        }
+
 
         liste.hode = new DobbeltLenketListe.Node(a);
         liste.hale = liste.hode;
-        if(liste.antall() < 0) {
-            tom();
-        }
+
+
         DobbeltLenketListe.Node p = liste.hale;
         p.verdi = a[0];
+
+        if(p.verdi == null) {
+            antall = 0;
+        }
+
         for (int i = 1; i < a.length; i++) {
             DobbeltLenketListe.Node q = new DobbeltLenketListe.Node(a[i]);
-
             q.forrige = p;
             p.neste = q;
             p = q;
