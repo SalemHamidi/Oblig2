@@ -139,7 +139,6 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 1q: leggInn-metoden brukes i konstruktøren!");
         }
-
     }
 
     ////// Oppgave 2 /////////////////////
@@ -269,8 +268,6 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 2n: Dette (" + tid + " ms) gikk altfor sakte!");
             System.out.println("            Har du kodet toString slik det ble bedt om?");
         }
-
-
     }
 
     ////// Oppgave 3 /////////////////////
