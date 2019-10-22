@@ -1,6 +1,19 @@
 //Skrevet av Salem Hamidi - S333946
 package com.oblig2;
 
+/*
+Oppgave 1 - Nesten ferdig - Feil håndtering av null-verdier
+Oppgave 2 - Nesten ferdig - Feil håndtering av omvendtString-Metode
+Oppgave 3 -
+Oppgave 4 - Helt fullført - alle tester kjører
+Oppgave 5 - Nesten helt ferdig - Følgefeil fra leggInn-metoden
+Oppgave 6 - Nesten helt ferdig - Følgefeil fra leggInn-metoden 			   brukt av fjern-metoden
+Oppgave7 - Helt fullført - alle tester kjører
+Oppgave 8 - Neste ferdig - feil i next()- og hasNext()-metoden
+Oppgave 9 - Følge feil fra leggInn- og hasNext()-metoden
+Opppgave 10 - Måfullføre metode - public static <T> void sorter(Liste<T> liste, Comparator<? super T> c)
+ */
+
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

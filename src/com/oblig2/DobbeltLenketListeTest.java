@@ -338,8 +338,6 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 3i: Metoden hent() gir feil svar!");
         }
-
-
 */
         try {
             liste.oppdater(3, null);
@@ -383,7 +381,6 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 3p: Metoden oppdater() setter verdien feil!");
         }
-
 /*
         if (liste.oppdater(0, -1) != 1) {
             antallFeil++;
@@ -410,7 +407,6 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 3t: Du har " + s + ", skal være [5, 3, 2, -1]!");
         }
-
 
         Integer[] i = {};
         DobbeltLenketListe<Integer> iliste = new DobbeltLenketListe<>(i);
@@ -501,10 +497,8 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-
  */
     }
-
     ////// Oppgave 4 /////////////////////
     @org.junit.jupiter.api.Test
     void oppgave4() {
