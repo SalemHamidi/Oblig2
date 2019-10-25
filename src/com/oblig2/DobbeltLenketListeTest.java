@@ -270,7 +270,7 @@ class DobbeltLenketListeTest {
     @org.junit.jupiter.api.Test
     void oppgave3() {
         int antallFeil = 0;
-/*
+
         Liste<Integer> testliste = new DobbeltLenketListe<>();
         for (int i = 0; i < 100000; i++) testliste.leggInn(i);
         long tid = System.currentTimeMillis();
@@ -282,7 +282,6 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 3a: Dette (" + tid + " ms) gikk altfor sakte!");
             System.out.println("            Har du kodet metoden finnNode() riktig?");
         }
-*/
         DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
 
         try {
@@ -324,7 +323,7 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 3h: Metoden hent() gir feil svar!");
         }
-/*
+
         liste.leggInn(2);
         liste.leggInn(3);
         liste.leggInn(4);
@@ -493,7 +492,6 @@ class DobbeltLenketListeTest {
             }
         }
 
- */
     }
     ////// Oppgave 4 /////////////////////
     @org.junit.jupiter.api.Test
@@ -695,18 +693,13 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-/* Følgefeil fra finnNode-metoden
-        if (!liste.fjern(3).equals("D")) {
-            antallFeil++;
-            System.out.println("Oppgave 6ga: Feil returverdi i metoden fjern(indeks)!");
-        }
-*/
+
         if (liste.antall() != 6) {
             antallFeil++;
             System.out.println("Oppgave 6gb: Feil i antall-oppdateringen i fjern(indeks)!");
             System.out.println("             Reduseres ikke antall? Reduserers den to ganger!");
         }
-/*
+
         liste.fjern(0);  // fjerner A
         liste.fjern(4);  // fjerner G
 
@@ -787,7 +780,7 @@ class DobbeltLenketListeTest {
             System.out.println(
                     "Oppgave 6q: Feil i antall-oppdateringen metoden fjern(T)!");
         }
-*/
+
         try {
             if (liste.fjern(null) != false) {
                 antallFeil++;
@@ -864,7 +857,7 @@ class DobbeltLenketListeTest {
 
         liste.leggInn("A");
         liste.leggInn("B");
-/*  Feil i LeggInn-metoden
+
         try {
             liste.fjern(1);
         } catch (Exception e) {
@@ -888,7 +881,7 @@ class DobbeltLenketListeTest {
 
 
         liste.leggInn("B");
-*/
+
         try {
             liste.fjern("B");
         } catch (Exception e) {
@@ -910,7 +903,7 @@ class DobbeltLenketListeTest {
         }
 
         Liste<Integer> nyliste = new DobbeltLenketListe<>();
-/*
+
         for (int i = 1; i <= 100_000; i++) nyliste.leggInn(i);
         long tid1 = System.currentTimeMillis();
         for (int i = 40000; i <= 50000; i++) nyliste.fjern(new Integer(i));
@@ -931,8 +924,6 @@ class DobbeltLenketListeTest {
             System.out.println("ved hjelp av den andre? Eller så er en av fjern-metodene dine litt treg.");
             antallFeil++;
         }
-        */
-
     }
 
     //// Oppgave 7 ////////////////////////////
@@ -1140,7 +1131,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-/*
+
         int m = 4;
         i = liste.iterator(3);
         for (; i.hasNext(); ) {
@@ -1161,7 +1152,6 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-*/
     }
 
     ////// Oppgave 9 /////////////////////

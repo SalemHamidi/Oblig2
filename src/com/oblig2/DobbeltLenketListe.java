@@ -1,22 +1,8 @@
 //Skrevet av Salem Hamidi - S333946
 package com.oblig2;
 
-/*
-Oppgave 1 - Nesten ferdig - Feil håndtering av null-verdier
-Oppgave 2 - Nesten ferdig - Feil håndtering av omvendtString-Metode
-Oppgave 3 -
-Oppgave 4 - Helt fullført - alle tester kjører
-Oppgave 5 - Nesten helt ferdig - Følgefeil fra leggInn-metoden
-Oppgave 6 - Nesten helt ferdig - Følgefeil fra leggInn-metoden 			   brukt av fjern-metoden
-Oppgave7 - Helt fullført - alle tester kjører
-Oppgave 8 - Neste ferdig - feil i next()- og hasNext()-metoden
-Oppgave 9 - Følge feil fra leggInn- og hasNext()-metoden
-Opppgave 10 - Måfullføre metode - public static <T> void sorter(Liste<T> liste, Comparator<? super T> c)
- */
-
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
-import com.sun.java.browser.plugin2.liveconnect.v1.InvocationDelegate;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
@@ -66,67 +52,65 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
         else {
+            indeks = indeks - 1;
             p = hale;
-            for(int i = 0; i < antall - indeks-1; i++) {
+            for(int i = 0; i < antall - indeks; i++) {
                 p = p.forrige;
             }
         }
         return p;
     }
 
-
     public DobbeltLenketListe(T[] a) {
-
         if(a == null) {
            Objects.requireNonNull(a, "Tabell a er null");
         }
-         for (int i = 0; i < a.length; i++) {
-             if (hode == null) {
-                 if (a[i] != null) {
-                     hode = new Node<>(a[i], null, hale);
-                     hale = hode;
-                     antall++;
-                 }
-             }
-             else {
-                 if (a[i] != null) {
-                     hale.neste = new Node<>(a[i], hale, null);
-                     hale = hale.neste;
-                     antall++;
-                 }
-             }
-         }
+        for (int i = 0; i < a.length; i++) {
+            if (hode == null) {
+                if (a[i] != null) {
+                    hode = new Node<>(a[i], null, hale);
+                    hale = hode;
+                    antall++;
+                }
+            }
+            else {
+                if (a[i] != null) {
+                    hale.neste = new Node<>(a[i], hale, null);
+                    hale = hale.neste;
+                    antall++;
+                }
+            }
+        }
     }
 
     public Liste<T> subliste(int fra, int til) {
-        //fratilKontroll(fra, til, antall);
         throw new NotImplementedException();
     }
 
-//Oppgave1
+
     @Override
     public int antall() {
       return antall;
     }
-//Oppgave1
+
     @Override
     public boolean tom() {
         return antall == 0;
     }
 
-//Skriver ut noe men ikke alt, delvis fullført
+
     @Override
     public boolean leggInn(T verdi) {
-
        Objects.requireNonNull(verdi, "Tabell a er null");
-
         if(antall > 0) {
+            //Hvis man skal legg inn en ny node i enden
             Node<T> n = new Node<>(verdi);
             hale.neste = n;
             n.forrige = hale;
             hale = n;
 
         } else {
+            //Hvis man skal legg inn en ny node i begynnelsen
             Node<T> n = new Node<>(verdi);
             hode = n;
             hale = n;
