@@ -58,21 +58,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     private Node<T> finnNode(int indeks) {
-
-        if (indeks < (antall / 2)) {
-            Node<T> p = hale;
-            for ( int i = 0; i < indeks; i++) {
+        Node<T> p;
+        if (indeks < antall / 2) {
+            p = hode;
+            for(int i = 0; i < indeks; i++) {
                 p = p.neste;
             }
-            return p;
         }
         else {
-            Node<T> q = hode;
-            for (int i = 0; i < indeks; i++) {
-                q = q.neste;
+            p = hale;
+            for(int i = 0; i < antall - indeks-1; i++) {
+                p = p.forrige;
             }
-            return q;
         }
+        return p;
     }
 
 
@@ -306,19 +305,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         while (p != null) {
             q = p.neste;
-            p.neste = q;
+            p.neste = null;
             p.verdi = null;
             p = q;
-            antall--;
         }
-        //Metode 2
-        for(int i = 0; i < antall; i++) {
-            fjern(0);
-            antall--;
-        }
-
         hode = hale = null;
         antall = 0;
+        endringer++;
     }
 
     @Override
@@ -377,8 +370,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks) {
-        indeksKontroll(indeks, true);
-        return iterator(indeks);
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -393,15 +386,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            Node<T> p = new Node(indeks);
-            p = denne;
-            denne = hode;
+            indeksKontroll(indeks, false);
+            denne = finnNode(indeks);
             fjernOK = false;
             iteratorendringer = endringer;
         }
 
         @Override
-        public boolean hasNext(){
+        public boolean hasNext() {
             return denne != null;
         }
 
@@ -410,8 +402,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             if(iteratorendringer != endringer) {
                 throw new ConcurrentModificationException();
             }
-
-            if(hasNext()) {
+            if(!hasNext()) {
                 throw new NoSuchElementException("Ingen verdier");
             }
             fjernOK = true;
@@ -429,57 +420,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 throw new ConcurrentModificationException();
             }
 
-
-            fjernOK = false;
-            Node<T> q = hode;
-            Node<T> p = null;
+            if(antall == 0) {
+                return;
+            }
 
             if(antall == 1) {
                 hode = null;
                 hale = null;
             }
-            // Den første skal fjernes
-            if(hode.neste == p) {
-                hode = hode.neste;
-                if(p == null) {
-                    hale = null;
-                }
-                else{
-                    Node<T> r = hode;
-                    while (r.neste.neste != p) {
-                        r = r.neste;
-                    }
-                    q = r.neste;
-                    r.neste = p;
-                    if(p == null) {
-                        hale = r;
-                    }
-                    q.verdi = null;
-                    q.neste = null;
-                    antall--;
-                    endringer++;
-                    iteratorendringer++;
+
+            else if(denne == null) {
+                hale = hale.forrige;
+                hale.neste = null;
+            }
+            else if(denne.forrige == hode) {
+                hode = denne;
+                denne.forrige = null;
+            }
+            else {
+                denne.forrige.forrige.neste = denne;
+                denne.forrige = denne.forrige.forrige;
+            }
+            fjernOK = false;
+            antall--;
+            endringer++;
+            iteratorendringer++;
+        }
+    }
+
+    // class DobbeltLenketListeIterator
+
+    public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
+        for(int i=0; i<liste.antall(); i++) {
+            for(int j=0; j<liste.antall()-i-1; j++) {
+                if(c.compare(liste.hent(j), liste.hent(j+1)) > 0) {
+                    T value1 = liste.hent(j);
+                    T value2 = liste.hent(j+1);
+                    liste.oppdater(j, value2);
+                    liste.oppdater(j+1, value1);
                 }
             }
         }
-    } // class DobbeltLenketListeIterator
-
-    public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new NotImplementedException();
     }
 } // class DobbeltLenketListe
-
-/*
- for (int i = 0; i < a.length && a[i] == null; i++) {
-            if (i < a.length) {
-                Node<T> p = hode = new Node<>(a[i]);
-                antall = 1;
-                for (i++; i < a.length; i++) {
-                    if (a[i] != null) {
-                        p = p.neste = new Node<>(a[i]);
-                        antall++;
-                    }
-                }
-                hale = p;
-            }
- */

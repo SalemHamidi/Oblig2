@@ -492,6 +492,8 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
+
+ */
     }
     ////// Oppgave 4 /////////////////////
     @org.junit.jupiter.api.Test
@@ -637,7 +639,7 @@ class DobbeltLenketListeTest {
             System.out.println(
                     "Oppgave 5h: Feil i antall-oppdateringen i metoden leggInn()!");
         }
-/*
+
         if (!liste.toString().equals("[1, 2, 3, 4, 5, 6, 7]")) {
             antallFeil++;
             System.out.println("Oppgave 5i: Feil i metoden leggInn()!");
@@ -648,7 +650,7 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 5j: Feil i metoden leggInn()!");
         }
 
- */
+
     }
 
     ///////// Oppgave 6 //////////////////////////
@@ -1071,7 +1073,7 @@ class DobbeltLenketListeTest {
 
         i = liste.iterator();
         liste.leggInn(0, 1);  // bruker leggInn(indeks,T) etter at iteratoren er opprettet
-/*
+
         try {
             i.next();
             antallFeil++;
@@ -1098,7 +1100,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-*/
+
         i = liste.iterator();
         liste.nullstill();  // nullstiller etter at iteratoren er opprettet
 
@@ -1113,7 +1115,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-/*
+
         for (int j = 1; j <= 7; j++) liste.leggInn(j);
 
         try {
@@ -1126,7 +1128,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-*/
+
 
         try {
             liste.iterator(-1);
@@ -1138,7 +1140,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-        /*
+/*
         int m = 4;
         i = liste.iterator(3);
         for (; i.hasNext(); ) {
@@ -1148,7 +1150,6 @@ class DobbeltLenketListeTest {
             }
             m++;
         }
-
 
         try {
             i.next();
@@ -1160,7 +1161,6 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-
 */
     }
 
@@ -1170,7 +1170,7 @@ class DobbeltLenketListeTest {
         int antallFeil = 0;
 
         DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>();
-/*
+
         for (int k = 1; k <= 13; k++) {
             liste.leggInn(k);
         }
@@ -1197,7 +1197,7 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 9c: Feil i remove()!");
         }
-*/
+
         // fjerner alle i listen
         Iterator<Integer> j = liste.iterator();
         for (; j.hasNext(); ) {
@@ -1221,7 +1221,7 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-/*
+
         for (int k = 1; k <= 5; k++) {
             liste.leggInn(k);
         }
@@ -1254,15 +1254,13 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
-
- */
     }
 
     ////// Oppgave 10 /////////////////////
     @org.junit.jupiter.api.Test
     void oppgave10() {
         int antallFeil = 0;
-/*
+
         DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(new String[0]);
         try {
             DobbeltLenketListe.sorter(liste, Comparator.naturalOrder());
@@ -1286,7 +1284,7 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 10c: Feil for liste med ett element!");
             antallFeil++;
         }
-
+/*
         liste = new DobbeltLenketListe<>(new String[]{"C", "B", "A"});
         DobbeltLenketListe.sorter(liste, Comparator.naturalOrder());
 
