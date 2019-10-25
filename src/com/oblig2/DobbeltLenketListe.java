@@ -16,12 +16,10 @@ Opppgave 10 - Måfullføre metode - public static <T> void sorter(Liste<T> liste
 
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
+import com.sun.java.browser.plugin2.liveconnect.v1.InvocationDelegate;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.sql.SQLOutput;
 import java.util.*;
-
-import java.util.function.Predicate;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 
@@ -54,8 +52,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public DobbeltLenketListe() {
-       hode = hale = null;
+        hode = hale = null;
         antall = 0;
+        endringer = 0;
     }
 
     private Node<T> finnNode(int indeks) {
@@ -101,7 +100,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(fra, til, antall);
+        //fratilKontroll(fra, til, antall);
         throw new NotImplementedException();
     }
 
@@ -120,15 +119,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean leggInn(T verdi) {
 
-        Objects.requireNonNull(verdi, "Ikke tilltatt med null-verdier");
-        if(antall == 0){
-            hode = hale = new Node<>(verdi);
+       Objects.requireNonNull(verdi, "Tabell a er null");
+
+        if(antall > 0) {
+            Node<T> n = new Node<>(verdi);
+            hale.neste = n;
+            n.forrige = hale;
+            hale = n;
+
+        } else {
+            Node<T> n = new Node<>(verdi);
+            hode = n;
+            hale = n;
         }
-        else {
-            hale = hale.neste = new Node<>(verdi);
-        }
-        antall++;
         endringer++;
+        antall++;
         return true;
     }
     /*
@@ -137,37 +142,58 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private Node<T> hale;          // peker til den siste i listen
     private int antall;            // antall noder i listen
     private int endringer;         // antall endringer i listen
-
      */
     @Override
     public void leggInn(int indeks, T verdi) {
-        Objects.requireNonNull(verdi, "Ikke tilltatt med null verdier");
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
         indeksKontroll(indeks, true);
 
-
-        if(indeks == 0) {
-            hale = hode = new Node<>(verdi);
+        if(antall == 0) {
+            leggInn(verdi);
+            return;
         }
-        if(antall == 0){
-            hale = hode;
+        //Oppretter ny hode
+        else if(indeks == 0){
+            Node<T> n = new Node<>(verdi);
+            n.neste = hode;
+            hode.forrige = n;
+            hode = n;
         }
+        //Oppretter ny hale
+        else if(indeks == antall){
+            Node<T> n = new Node<>(verdi);
+            n.forrige = hale;
+            hale.neste = n;
+            hale = n;
+        }
+        //Dersom indeks er større enn antall/2 start fra høyre
+        else if(indeks > antall/2){
+            Node<T> aktuell = hode;
+            for(int i = 0; i < indeks-1; i++){
+                aktuell = aktuell.neste;
+            }
 
-        if(indeks > antall) {
+            Node<T> p = new Node<>(verdi);
+            p.neste = aktuell.neste;
+            p.forrige = aktuell;
+            aktuell.neste = p;
+            p.neste.forrige = p;
+        }
+        //Dersom indeks er mindre enn antall/2 start fra venstre
+        else{
             Node<T> q = hale;
-            for(int i = indeks; i < 100_001; i--) {
-                q = hale.forrige;
+            for(int i = antall; i > indeks; i--){
+                q = q.forrige;
             }
-            q.forrige = new Node<>(verdi);
-    }
 
-        if(indeks < antall) {
-            Node<T> p = hode;
-            for(int i = indeks; i < indeks; i++) {
-                p = p.neste;
-            }
-            p.neste = new Node<>(verdi);
+            Node<T> n = new Node<>(verdi);
+            n.neste = q.neste;
+            n.forrige = q;
+            q.neste = n;
+            n.neste.forrige = n;
         }
         antall++;
+        endringer++;
     }
 
     @Override
@@ -202,7 +228,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T oppdater(int indeks, T nyverdi) {
         Objects.requireNonNull(nyverdi, "Ikke tilltatt med null-verdier");
         indeksKontroll(indeks, false);
-
         Node<T> p = finnNode(indeks);
         T gammelVerdi = p.verdi;
         p.verdi = nyverdi;
@@ -298,46 +323,53 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
+        if (tom()) {
+            return "[]";
+        }
+
         StringBuilder s = new StringBuilder();
-        s.append('[');
-
-        if (!tom()) {
-            Node<T> p = hode;
-            s.append(p.verdi);
-
-            p = p.neste;
-
-            while (p != null) {
-                s.append(',').append(' ').append(p.verdi);
-                p = p.neste;
+        s.append("[");
+        Node<T> p = hode;
+        while(p != null) {
+            if (p == hale) {
+                s.append(p.verdi);
+            } else {
+                s.append(p.verdi + ", ");
             }
+            p = p.neste;
         }
         s.append(']');
         return s.toString();
     }
+
     /* Oppgave 10
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException("Ikke laget ennå!");
     }
     */
-    public String omvendtString() {
-        if(tom()) {
+    public String omvendtString(){
+        if (tom()) {
             return "[]";
         }
-        StringBuilder s  = new StringBuilder();
+
+        StringBuilder s = new StringBuilder();
         s.append("[");
         Node<T> q = hale;
-        for(int i = 0; i < antall(); i++) {
-            if (q != null) {
+        if(!tom()) {
+
+        }
+        while(q != null) {
+            if (q == hode) {
                 s.append(q.verdi);
-                q = q.forrige;
-            } else if (q != null) {
-                s.append(", ");
+            } else {
+                s.append(q.verdi + ", ");
             }
+            q = q.forrige;
         }
         s.append(']');
         return s.toString();
     }
+
 
     @Override
     public Iterator<T> iterator() {

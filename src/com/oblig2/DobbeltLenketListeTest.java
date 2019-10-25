@@ -200,7 +200,6 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println
                     ("Oppgave 2h: Du har " + s + ", skal være [1]!");
-
         }
 
         liste.leggInn(2);
@@ -325,17 +324,16 @@ class DobbeltLenketListeTest {
             antallFeil++;
             System.out.println("Oppgave 3h: Metoden hent() gir feil svar!");
         }
-
+/*
         liste.leggInn(2);
         liste.leggInn(3);
         liste.leggInn(4);
-        /*
         if (liste.hent(3) != 4 || liste.hent(2) != 3
                 || liste.hent(1) != 2 || liste.hent(0) != 1) {
             antallFeil++;
             System.out.println("Oppgave 3i: Metoden hent() gir feil svar!");
         }
-*/
+
         try {
             liste.oppdater(3, null);
             antallFeil++;
@@ -378,7 +376,7 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 3p: Metoden oppdater() setter verdien feil!");
         }
-/*
+
         if (liste.oppdater(0, -1) != 1) {
             antallFeil++;
             System.out.println
@@ -494,7 +492,6 @@ class DobbeltLenketListeTest {
                 antallFeil++;
             }
         }
- */
     }
     ////// Oppgave 4 /////////////////////
     @org.junit.jupiter.api.Test
