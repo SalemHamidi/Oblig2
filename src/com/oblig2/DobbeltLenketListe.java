@@ -79,45 +79,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) {
 
-        DobbeltLenketListe liste = new DobbeltLenketListe();
-
-        Objects.requireNonNull(a, "ikke tilltatt med null");
-
         if(a == null) {
-            throw new NullPointerException("Tabellen a er null!");
+           Objects.requireNonNull(a, "Tabell a er null");
         }
-        if(a.length == 0) {
-            return;
-        }
-
-        if(a.length == 1) {
-            hode = hale;
-            antall = 1;
-        }
-        if(a.length >=2 ) {
-            antall++;
-        }
-
-
-        liste.hode = new DobbeltLenketListe.Node(a);
-        liste.hale = liste.hode;
-
-
-        DobbeltLenketListe.Node p = liste.hale;
-        p.verdi = a[0];
-
-        if(p.verdi == null) {
-            antall = 0;
-        }
-
-        for (int i = 1; i < a.length; i++) {
-            DobbeltLenketListe.Node q = new DobbeltLenketListe.Node(a[i]);
-            q.forrige = p;
-            p.neste = q;
-            p = q;
-            liste.hale = q;
-            antall++;
-        }
+         for (int i = 0; i < a.length; i++) {
+             if (hode == null) {
+                 if (a[i] != null) {
+                     hode = new Node<>(a[i], null, hale);
+                     hale = hode;
+                     antall++;
+                 }
+             }
+             else {
+                 if (a[i] != null) {
+                     hale.neste = new Node<>(a[i], hale, null);
+                     hale = hale.neste;
+                     antall++;
+                 }
+             }
+         }
     }
 
     public Liste<T> subliste(int fra, int til) {
