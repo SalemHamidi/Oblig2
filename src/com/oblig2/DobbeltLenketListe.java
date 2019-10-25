@@ -45,6 +45,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     private Node<T> finnNode(int indeks) {
         Node<T> p;
+        //Hvis indeks er mindre enn antall del på 2 start på venstre side
         if (indeks < antall / 2) {
             p = hode;
             for(int i = 0; i < indeks; i++) {
@@ -52,9 +53,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
         else {
-            indeks = indeks - 1;
+            //Hvis indeks er større enn antall del på 2 start på høyre side
             p = hale;
-            for(int i = 0; i < antall - indeks; i++) {
+            for(int i = 0; i < antall - indeks - 1; i++) {
                 p = p.forrige;
             }
         }
@@ -119,13 +120,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall++;
         return true;
     }
-    /*
-        // instansvariabler
-    private Node<T> hode;          // peker til den første i listen
-    private Node<T> hale;          // peker til den siste i listen
-    private int antall;            // antall noder i listen
-    private int endringer;         // antall endringer i listen
-     */
+
     @Override
     public void leggInn(int indeks, T verdi) {
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
@@ -211,6 +206,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T oppdater(int indeks, T nyverdi) {
         Objects.requireNonNull(nyverdi, "Ikke tilltatt med null-verdier");
         indeksKontroll(indeks, false);
+
         Node<T> p = finnNode(indeks);
         T gammelVerdi = p.verdi;
         p.verdi = nyverdi;
@@ -239,14 +235,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         else if (q == hode) {
             hode = hode.neste;
         }
-
         else {
             p.neste = q.neste;
         }
         if (q == hale) {
             hale = p;
-
         }
+
         q.verdi = null;
         q.neste = null;
         antall--;
@@ -256,7 +251,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T fjern(int indeks) {
         indeksKontroll(indeks, false);
-
         T temp;
 
         if(indeks == 0) {
@@ -282,8 +276,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-
-        //Metode 1
         Node<T> p = hode;
         Node<T> q = null;
 
@@ -319,11 +311,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return s.toString();
     }
 
-    /* Oppgave 10
-    public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException("Ikke laget ennå!");
-    }
-    */
     public String omvendtString(){
         if (tom()) {
             return "[]";
@@ -332,9 +319,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder s = new StringBuilder();
         s.append("[");
         Node<T> q = hale;
-        if(!tom()) {
 
-        }
         while(q != null) {
             if (q == hode) {
                 s.append(q.verdi);
@@ -346,7 +331,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         s.append(']');
         return s.toString();
     }
-
 
     @Override
     public Iterator<T> iterator() {
@@ -430,9 +414,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             endringer++;
             iteratorendringer++;
         }
-    }
-
-    // class DobbeltLenketListeIterator
+    }  // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         for(int i = 0; i < liste.antall(); i++) {

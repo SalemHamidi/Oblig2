@@ -1265,8 +1265,6 @@ class DobbeltLenketListeTest {
             antallFeil++;
         }
 
-
-
         liste = new DobbeltLenketListe<>(new String[]{"A"});
         DobbeltLenketListe.sorter(liste, Comparator.naturalOrder());
 
@@ -1290,6 +1288,7 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 10e: Feil for listen G, B, F, C, E, D, A!");
             antallFeil++;
         }
+
 
         Integer[] a = {8, 5, 2, 11, 7, 3, 15, 14, 10, 17, 18, 9, 4, 12, 13, 19, 20, 1, 16, 6};
         DobbeltLenketListe<Integer> intliste = new DobbeltLenketListe<>(a);
