@@ -211,15 +211,13 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 2i: Du har " + s + ", skal være [1, 2]!");
         }
-/*
+
         s = liste.omvendtString();
         if (!s.equals("[2, 1]")) {
             antallFeil++;
             System.out.println
                     ("Oppgave 2j: Du har " + s + ", skal være [2, 1]!");
         }
- */
-
 
         liste.leggInn(3);
         liste.leggInn(4);
@@ -230,7 +228,7 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 2k: Du har " + s + ", skal være [1, 2, 3, 4]!");
         }
-/*
+
         s = liste.omvendtString();
         if (!s.equals("[4, 3, 2, 1]")) {
             antallFeil++;
@@ -256,7 +254,7 @@ class DobbeltLenketListeTest {
             System.out.println
                     ("Oppgave 2m: Du har " + t2 + ", men det skal være " + t1);
         }
-*/
+
         for (int i = 0; i < 20000; i++) liste.leggInn(i);
         long tid = System.currentTimeMillis();
         liste.toString();

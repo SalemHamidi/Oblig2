@@ -321,17 +321,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
     */
     public String omvendtString() {
+        if(tom()) {
+            return "[]";
+        }
         StringBuilder s  = new StringBuilder();
         s.append("[");
-
-        if (!tom()) {
-            Node<T> q = hale;
-            s.append(q.verdi);
-            q = q.forrige;
-
-            while(q != null){
-                s.append(',').append(' ').append(q.verdi);
+        Node<T> q = hale;
+        for(int i = 0; i < antall(); i++) {
+            if (q != null) {
+                s.append(q.verdi);
                 q = q.forrige;
+            } else if (q != null) {
+                s.append(", ");
             }
         }
         s.append(']');
