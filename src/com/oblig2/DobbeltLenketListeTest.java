@@ -1284,7 +1284,7 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 10c: Feil for liste med ett element!");
             antallFeil++;
         }
-/*
+
         liste = new DobbeltLenketListe<>(new String[]{"C", "B", "A"});
         DobbeltLenketListe.sorter(liste, Comparator.naturalOrder());
 
@@ -1310,6 +1310,5 @@ class DobbeltLenketListeTest {
             System.out.println("Oppgave 10f: Metoden sorterer feil!");
             antallFeil++;
         }
-*/
     }
 }

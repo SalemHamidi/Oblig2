@@ -451,13 +451,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        for(int i=0; i<liste.antall(); i++) {
-            for(int j=0; j<liste.antall()-i-1; j++) {
-                if(c.compare(liste.hent(j), liste.hent(j+1)) > 0) {
-                    T value1 = liste.hent(j);
-                    T value2 = liste.hent(j+1);
-                    liste.oppdater(j, value2);
-                    liste.oppdater(j+1, value1);
+        for(int i = 0; i < liste.antall(); i++) {
+            for(int j = 0; j < liste.antall() - i-1; j++) {
+                if(c.compare(liste.hent(j), liste.hent(j + 1)) > 0) {
+                    T a = liste.hent(j);
+                    T b = liste.hent(j + 1);
+                    liste.oppdater(j, b);
+                    liste.oppdater(j + 1, a);
                 }
             }
         }
